@@ -8,121 +8,215 @@
     <link rel="stylesheet" href="portfolio.css">
     
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
-    <script defer src="portfolio.js"></script>
     
     <title>Bhargavi Mutyala</title> 
     <style>
-        /* --- SCROLLBAR FIX --- */
+        /* --- GLOBAL & FONT SIZE --- */
+        :root {
+            --font-size-base: 1rem;
+            --font-size-lg: 1.1rem;
+            --font-size-xl: 1.25rem;
+            --font-size-h3: 1.65rem;
+        }
+        
+        body {
+            font-size: var(--font-size-base);
+        }
+
+        /* --- LAYOUT & SCROLL FIX --- */
         html, body {
             position: relative;
             height: 100%;
-            overflow: hidden; /* Prevents double scrollbar on main page */
+            overflow: hidden;
+        }
+        .swiper-container, .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Default slide style */
+        .swiper-slide {
+            height: 100%;
+            overflow-y: auto; /* Re-enabled default scrollbar */
+            overflow-x: hidden;
+            padding: 40px 60px;
+            box-sizing: border-box;
+            position: relative;
+            scroll-behavior: smooth; /* Smooth scrolling for PageUp/Down */
+        }
+        
+        /* === ENHANCED SCROLLBAR UI === */
+        .swiper-slide::-webkit-scrollbar {
+            width: 8px;
+        }
+        .swiper-slide::-webkit-scrollbar-track {
+            background: #1e1f22; 
+            border-radius: 10px;
+        }
+        .swiper-slide::-webkit-scrollbar-thumb {
+            background-color: #555; 
+            border-radius: 10px;
+            border: 2px solid #1e1f22; 
+        }
+        .swiper-slide::-webkit-scrollbar-thumb:hover {
+            background-color: #777; 
         }
         .swiper-slide {
-            overflow-y: auto; /* Allows scrolling *within* a slide if content is long */
-            overflow-x: hidden;
-            /* Add padding for content within the slide */
-            padding: 20px 40px; 
+            scrollbar-width: thin; 
+            scrollbar-color: #555 #1e1f22; 
         }
-        /* Keep home slide centered */
-        .home-slide {
-            padding: 0; 
-        }
-        /* --- END FIX --- */
+        /* --- END ENHANCED SCROLLBAR --- */
 
-        /* Profile Links Styling (Moved from Contact Page) */
-        .profile-links-list a {
-            color: white; 
+
+        /* Home slide override */
+        .home-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            overflow-y: hidden;
+        }
+        
+        .HomeContent {
+            position: relative;
+            flex: 1;
+            padding: 40px 60px;
+        }
+        .heroline {
+            font-size: var(--font-size-lg);
+            max-width: 600px;
+        }
+
+        /* --- HOME PAGE - PROFILE LINKS (Top Right) --- */
+        .social-links-home {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            z-index: 10;
+        }
+        .social-links-home a {
+            color: white;
             text-decoration: none;
-            margin: 0 8px;
-            font-size: 1.2rem; /* Make icons a bit bigger */
+            margin: 0 0 0 20px;
+            font-size: 1.6rem;
+            transition: color 0.3s ease;
         }
-        .profile-links-list a:hover {
-            color: #ccc; /* Simple hover effect */
+        .social-links-home a:hover {
+            color: #ffd700;
         }
         
-        /* Achievements Styling */
-        .achievements-section {
+        /* --- COLLISION FIX --- */
+        .HomeContent h1 {
+            padding-right: 200px;
+        }
+        @media (max-width: 768px) {
+            .HomeContent h1 {
+                padding-right: 0; 
+            }
+            .social-links-home {
+                position: static; 
+                margin-top: 20px;
+                text-align: left; 
+            }
+            .social-links-home a {
+                margin: 0 10px 0 0; 
+            }
+        }
+        /* --- END COLLISION FIX --- */
+
+        /* --- ABOUT ME & ACHIEVEMENTS LAYOUT --- */
+        .details-heading {
+            font-size: var(--font-size-xl);
+            color: #fff;
             margin-top: 30px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 8px;
+            display: inline-block;
         }
-        
+        .about-me-table {
+            width: 100%; 
+            font-size: var(--font-size-lg);
+        }
+        .achievements-section {
+            margin-top: 0;
+            padding-bottom: 60px;
+        }
+        .achievements-section .details-heading {
+             margin-top: 0;
+        }
+
+        /* --- ACHIEVEMENTS LIST STYLING --- */
         .achievements-list {
             list-style: none;
             padding-left: 0;
-            margin-top: 15px;
+            margin-top: 25px;
         }
-        
         .achievements-list li {
             position: relative;
-            padding-left: 30px; /* Space for the icon */
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            padding-left: 35px; 
+            margin-bottom: 18px; 
+            font-size: var(--font-size-lg);
+            line-height: 1.6;
+            color: #f0f0f0; 
+            font-weight: 500;
         }
-        
         .achievements-list li::before {
-            content: '\f091'; /* Font Awesome trophy icon */
+            content: '\f091'; 
             font-family: "Font Awesome 6 Free";
             font-weight: 900;
-            color: #ffd700; /* Gold color for the icon */
+            color: #ffd700; 
             position: absolute;
             left: 0;
             top: 2px;
+            font-size: 1.2rem;
         }
 
-        /* --- NEW PROJECT SECTION STYLES --- */
+        /* --- PROJECT SECTION STYLES --- */
         .projects-container {
             width: 100%;
-            max-width: 960px; /* Max width for readability */
+            max-width: 960px; 
             margin: 0 auto;
-            padding-bottom: 60px; /* Extra space at the bottom */
+            padding-bottom: 60px; /* Add padding to bottom for scroll */
         }
-
         .project-card {
-            background-color: #1e1f22; /* Dark card background */
+            background-color: #1e1f22; 
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             border: 1px solid #333;
         }
-
         .project-title {
-            font-size: 1.5rem;
+            font-size: var(--font-size-h3);
             color: #ffffff;
             font-weight: 600;
             margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
-
         .project-title .github-link {
             color: #aaa;
             margin-left: 15px;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: color 0.3s ease;
         }
-
         .project-title .github-link:hover {
             color: #fff;
         }
-
         .project-tech {
-            font-size: 0.9rem;
-            color: #ffd700; /* Gold color for tech */
+            font-size: var(--font-size-base);
+            color: #ffd700;
             font-family: 'Courier New', Courier, monospace;
             margin-bottom: 15px;
             font-weight: 500;
         }
-
         .project-description {
-            font-size: 0.95rem;
+            font-size: var(--font-size-lg);
             color: #ccc;
-            line-height: 1.6;
+            line-height: 1.7;
         }
-        /* --- END PROJECT STYLES --- */
-
     </style>
 </head>
 <body>
@@ -136,7 +230,10 @@
                 <li onclick="Navigate(1)"><i class="fa-solid fa-user" ></i>
                     <p>About Me</p>
                 </li>
-                <li onclick="Navigate(2)"><i class="fa-solid fa-diagram-project"></i>
+                <li onclick="Navigate(2)"><i class="fa-solid fa-trophy"></i>
+                    <p>Achievements</p>
+                </li>
+                <li onclick="Navigate(3)"><i class="fa-solid fa-diagram-project"></i>
                     <p>Projects</p>
                 </li>
                 <li ><i class="fas fa-file-alt"></i> <a href="Mutyala_Bhargavi_Resume.pdf" style="text-decoration: none;color: white;" target="_blank">
@@ -149,14 +246,23 @@
                 
                 <div class="swiper-slide home-slide">
                     <div class="HomeContent">
+                        <div class="social-links-home">
+                            <a href="https://www.linkedin.com/in/bhargavi-mani-mutyala-9742b7259/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://github.com/BhargaviManiMutyala" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://leetcode.com/u/BhargaviMutyala/" target="_blank" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a> 
+                            <a href="https://www.hackerrank.com/profile/22B01A05C4" target="_blank" aria-label="HackerRank"><i class="fa-brands fa-hackerrank"></i></a>
+                        </div>
+                        
                         <h1>Hi! I'm <span class="stylized-name">Bhargavi Mutyala</span>,</h1>
                         <h2><span class="proffesions"></span></h2>
-                        <p class="heroline">This is my portfolio</p>
+                        <p class="heroline">
+                            A passionate Computer Science student from SVECW with a 9.01 CGPA. My focus is on solving real-world problems using technology, and I specialize in Data Visualization, Machine Learning, and Full-Stack Development. Welcome to my portfolio.
+                        </p>
                         <div class="buttonGroup">
                             <li onclick="Navigate(1)">
                                 <button>about me </button>
                             </li>
-                            </div>
+                        </div>
                     </div>
                     <div class="SideImg">
                         <div class="top-right-corner">
@@ -173,46 +279,37 @@
                     </p>
                 </div>
                 
-                <div class="swiper-slide">
-                    <div class="about-us">
-                        <h1 class="heading">About Me</h1>
-                        <h3 class="sub-heading">I'm Bhargavi Mutyala, <span class="proffesions">Pursuing Computer Science at SVECW</span></h3>
-                        <p class="aboutme-deatils">
-                            Here you can see all my achievements and experiences.
-                        </p>
-                        <div class="about-me-divison">
-                            <div class="about-me-table">
-                                <li><span>Experience:</span> Data Visualization Intern at Infosys Springboard (Oct 2024-Dec 2024). Built a Power BI project to analyze urban economic data and integrated dashboards with a Streamlit web app. [cite: 19, 20, 21]</li>
-                                <li><span>Country:</span> India</li>
-                                <li><span>Phone</span>: +91 8374147834 [cite: 2]</li>
-                                <li><span>Degree</span>: B.Tech. in Computer Science and Engineering (9.01 CGPA) from Shri Vishnu Engineering College for Women. [cite: 9, 10]</li>
-                                <li><span>Profiles:</span> 
-                                    <span class="profile-links-list">
-                                        <a href="https://www.linkedin.com/in/bhargavi-mani-mutyala-9742b7259/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                                        <a href="https://github.com/BhargaviManiMutyala" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                                        <a href="https://leetcode.com/u/BhargaviMutyala/" target="_blank" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a> 
-                                        <a href="https://www.hackerrank.com/profile/22B01A05C4" target="_blank" aria-label="HackerRank"><i class="fa-brands fa-hackerrank"></i></a>
-                                    </span>
-                                </li>
-                            </div>
-                            
-                            <div class="achievements-section">
-                                <h2 class="sub-heading" style="margin-bottom: 20px;">Achievements</h2>
-                                <ul class="achievements-list">
-                                    <li>Finalist at L&T Techgium 8th Edition (Top 36 from 3,000+ abstracts) [cite: 36]</li>
-                                    <li>Smart Coder Gold by Smart Interviews for excellence in problem-solving [cite: 37]</li>
-                                    <li>Third Prize Winner, APPATHON-24 (from 40+ teams) [cite: 38]</li>
-                                    <li>Top 25 Innovations, IDEATHON-2023 at college-level [cite: 39]</li>
-                                    <li>First Place, Group Discussion Competition (ISTE Student Chapter) [cite: 40]</li>
-                                    <li>NPTEL Certifications in Java and Database Management Systems [cite: 40]</li>
-                                    <li>Hackathon Participation at Smart India Hackathon and Google Solution Challenge [cite: 41]</li>
-                                    <li>HackerRank Gold Badge in Problem Solving [cite: 42]</li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="swiper-slide about-us">
+                    <h1 class="heading">About Me</h1>
+                    <h3 class="sub-heading">I'm Bhargavi Mutyala, <span class="proffesions">Pursuing Computer Science at SVECW</span></h3>
+                    
+                    <h2 class="details-heading">My Details</h2>
+                    <div class="about-me-table">
+                        <li><span>Experience:</span> Data Visualization Intern at Infosys Springboard (Oct 2024-Dec 2024). Built a Power BI project to analyze urban economic data and integrated dashboards with a Streamlit web app.  </li>
+                        <li><span>Country:</span> India</li>
+                        <li><span>Phone</span>: +91 8374147834  </li>
+                        <li><span>Email</span>: bhargavimanim@gmail.com    </li>
+                        <li><span>Degree</span>: B.Tech. in Computer Science and Engineering (9.01 CGPA) from Shri Vishnu Engineering College for Women.    </li>
                     </div>
                 </div>
                 
+                <div class="swiper-slide achievements-slide">
+                    <h1 class="heading">Achievements</h1>
+                    
+                    <div class="achievements-section">
+                        <ul class="achievements-list">
+                            <li>Finalist at L&T Techgium 8th Edition (Top 36 from 3,000+ abstracts)    </li>
+                            <li>Smart Coder Gold by Smart Interviews for excellence in problem-solving      </li>
+                            <li>Third Prize Winner, APPATHON-24 (from 40+ teams)    </li>
+                            <li>Top 25 Innovations, IDEATHON-2023 at college-level    </li>
+                            <li>First Place, Group Discussion Competition (ISTE Student Chapter)    </li>
+                            <li>NPTEL Certifications in Java and Database Management Systems    </li>
+                            <li>Hackathon Participation at Smart India Hackathon and Google Solution Challenge    </li>
+                            <li>HackerRank Gold Badge in Problem Solving    </li>
+                        </ul>
+                    </div>
+                </div>
+
                 <div class="swiper-slide projects">
                     <h1 class="heading">Projects</h1>
                     
@@ -222,47 +319,47 @@
                             <h3 class="project-title">AI-enabled building automation system</h3>
                             <p class="project-tech">Arduino | Fine Tree Classifier | MATLAB | ThingSpeak | POC</p>
                             <p class="project-description">
-                                Developed a prototype that reduces building carbon emissions by 50% leveraging sensor data on ThingSpeak and using a machine learning model to predict optimal actuator actions, minimizing energy waste and operational costs. [cite: 25]
+                                Developed a prototype that reduces building carbon emissions by 50% leveraging sensor data on ThingSpeak and using a machine learning model to predict optimal actuator actions, minimizing energy waste and operational costs.
                             </p>
                         </div>
 
                         <div class="project-card">
                             <h3 class="project-title">
                                 DeskSlot
-                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                <a href="https://github.com/BhargaviManiMutyala/DeskSlot" target="_blank" class="github-link" aria-label="GitHub">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
                             </h3>
-                            <p class="project-tech">Python | SQL | MySQL</p>
+                            <p class="project-tech">Python | SQL | MySQL   </p>
                             <p class="project-description">
-                                Developed 'DeskSlot', a booking system that helps students easily find and reserve functional computer systems after class hours. [cite: 27] Features real-time accessibility tracking and efficient resource utilization to reduce wait times. [cite: 28]
-                            </p>
+                                Developed 'DeskSlot', a booking system that helps students easily find and reserve functional computer systems after class hours.    Features real-time accessibility tracking and efficient resource utilization to reduce wait times.
+                            </D>
                         </div>
 
                         <div class="project-card">
                             <h3 class="project-title">
                                 Legal awareness
-                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                <a href="https://github.com/BhargaviManiMutyala/LegalAwareness" target="_blank" class="github-link" aria-label="GitHub">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
                             </h3>
-                            <p class="project-tech">HTML | CSS | JavaScript | Java | SQL | MySQL</p>
+                            <p class="project-tech">HTML | CSS | JavaScript | Java | SQL | MySQL   </p>
                             <p class="project-description">
-                                Developed 'Legal Awareness', a comprehensive web application to educate users about various laws and legal procedures. [cite: 30] The platform provides interactive resources, case examples, and practical guidance, enabling users to clearly understand their rights and make informed decisions. [cite: 31]
+                                Developed 'Legal Awareness', a comprehensive web application to educate users about various laws and legal procedures.    The platform provides interactive resources, case examples, and practical guidance, enabling users to clearly understand their rights and make informed decisions.
                             </p>
                         </div>
 
                         <div class="project-card">
                             <h3 class="project-title">
                                 GrowthBridge
-                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                <a href="https://github.com/BhargaviManiMutyala/GrowthBridge" target="_blank" class="github-link" aria-label="GitHub">
                                     <i class="fa-brands fa-github"></i>
                                 </a>
                             </h3>
-                            <p class="project-tech">Java | FireStore | Android Studio</p>
+                            <p class="project-tech">Java | FireStore | Android Studio </p>
                             <p class="project-description">
-                                Developed 'GrowthBridge', an Android application that connects visionary investors with innovative start-ups through a streamlined digital platform. [cite: 33] The app facilitates funding opportunities, networking, and growth for entrepreneurs. [cite: 34]
-                            </p>
+                                Developed 'GrowthBridge', an Android application that connects visionary investors with innovative start-ups through a streamlined digital platform.    The app facilitates funding opportunities, networking, and growth for entrepreneurs.
+                            </D>
                         </div>
 
                     </div>
@@ -270,6 +367,96 @@
 
             </div>
     </main>
+    
+    <script>
+        let swiper;
+
+        function updateActiveLink(index) {
+            const links = document.querySelectorAll('aside .Links li');
+            links.forEach((link) => {
+                link.classList.remove('activeLink');
+            });
+            
+            let activeIndex = swiper.realIndex !== undefined ? swiper.realIndex : index;
+
+            if (activeIndex >= 0 && activeIndex < links.length && links[activeIndex].hasAttribute('onclick')) {
+                links[activeIndex].classList.add('activeLink');
+            }
+        }
+
+        function Navigate(index) {
+            if (swiper) {
+                if (swiper.params.loop) {
+                    swiper.slideToLoop(index);
+                } else {
+                    swiper.slideTo(index);
+                }
+            }
+        }
+        
+        // --- CUSTOM KEYBOARD CONTROLS SCRIPT ---
+        function handleKeydown(e) {
+            if (!swiper) return;
+
+            const activeSlide = swiper.slides[swiper.activeIndex];
+
+            // Check for PageDown
+            if (e.key === 'PageDown') {
+                // If we are on the Projects slide (index 3)
+                if (activeSlide.classList.contains('projects')) {
+                    e.preventDefault(); // Stop Swiper from changing slide
+                    // Scroll the slide's content down
+                    activeSlide.scrollTop += activeSlide.clientHeight * 0.8;
+                } else {
+                    // Otherwise, go to the next slide
+                    swiper.slideNext();
+                }
+            } 
+            // Check for PageUp
+            else if (e.key === 'PageUp') {
+                // If we are on the Projects slide (index 3)
+                if (activeSlide.classList.contains('projects')) {
+                    e.preventDefault(); // Stop Swiper from changing slide
+                    // Scroll the slide's content up
+                    activeSlide.scrollTop -= activeSlide.clientHeight * 0.8;
+                } else {
+                    // Otherwise, go to the previous slide
+                    swiper.slidePrev();
+                }
+            }
+        }
+        // --- END CUSTOM KEYBOARD SCRIPT ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            swiper = new Swiper('.mySwiper', {
+                effect: 'cube',
+                grabCursor: true,
+                cubeEffect: {
+                    shadow: true,
+                    slideShadows: true,
+                    shadowOffset: 20,
+                    shadowScale: 0.94,
+                },
+                
+                // Keyboard control is now handled manually
+                keyboard: false, 
+                
+                mousewheel: true, 
+                
+                slidesPerView: 1, 
+                spaceBetween: 0,
+                
+                on: {
+                    slideChange: function () {
+                        updateActiveLink(this.activeIndex);
+                    },
+                },
+            });
+            
+            // Add our custom keyboard listener to the document
+            document.addEventListener('keydown', handleKeydown);
+        });
+    </script>
     
 </body>
 </html>
