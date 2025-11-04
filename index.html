@@ -5,25 +5,452 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
-    <link rel="stylesheet" href="portfolio.css">
-    
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     
     <title>Bhargavi Mutyala</title> 
     <style>
-        /* --- GLOBAL & FONT SIZE --- */
+        /* --- ALL CSS FROM portfolio.css AND PREVIOUS <style> BLOCKS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bonbon&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+        }
+
+        main {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            font-family: Poppins;
+        }
+
+        aside {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            font-size: 1.1rem;
+            background-color: #212529;
+            backdrop-filter: blur(20px);
+            transition: left 0.3s ease; /* Added for mobile toggle */
+        }
+
+        .Links {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        aside li {
+            list-style-type: none;
+            display: flex;
+            padding: 20px;
+            gap: 10px;
+            color: white;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            transition-duration: 0.2s;
+        }
+
+        aside li:hover {
+            color: #80ed99;
+        }
+
+        aside li::after {
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #ffffff24, transparent);
+            content: '';
+            bottom: 0px;
+        }
+
+        aside li i {
+            font-size: 1.3rem;
+        }
+        .activeLink{
+            color:#80ed99
+        }
+        .mySwiper {
+            flex: 1;
+            height: 100%;
+            overflow: hidden; /* This was in your CSS, but swiper handles its own overflow */
+        }
+
+        .home-slide {
+            color: white;
+            display: flex;
+            background-color: #343a40;
+        }
+
+        .HomeContent {
+            margin: auto 0px;
+            flex: 1;
+            height: auto;
+            padding: 100px;
+            user-select: none;
+        }
+
+        .SideImg {
+            width: 30%;
+            margin: auto 10px;
+            margin-right: 100px;
+            position: relative;
+        }
+
+        .SideImg img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .SideImg .top-right-corner,
+        .bottom-left-corner {
+            position: absolute;
+        }
+
+        .bottom-left-corner {
+            left: -50px;
+            bottom: -50px;
+            rotate: -90deg;
+        }
+
+        .top-right-corner {
+            right: -50px;
+            top: -50px;
+            rotate: 90deg;
+        }
+
+        .hr1 {
+            width: 150px;
+            height: 10px;
+            border: none;
+            background: #80ed99;
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .hr2 {
+            width: 10px;
+            height: 120px;
+            border-bottom-left-radius: 3px;
+            background: #80ed99;
+            border: none;
+            border-bottom-right-radius: 3px;
+        }
+
+        .HomeContent h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .HomeContent h2 {
+            font-size: 2.3em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .HomeContent h1 .stylized-name {
+            font-weight: 700;
+            color: #80ed99;
+        }
+
+        .proffesions {
+            color: #85f69f;
+        }
+
+        .HomeContent .heroline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            padding-right:50px;
+        }
+
+        .buttonGroup {
+            display: flex;
+            padding: 10px 0px;
+            margin-top: 10px;
+        }
+
+        .buttonGroup button ,.primary{
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #1d8637;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .slide-help {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-weight: 400;
+            z-index: 100;
+            left: 0%;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.2rem;
+        }
+
+        /* --- Swiper styles from portfolio.css --- */
+        .mySwiper {
+            width: 80vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #343a40;
+        }
+
+        .swiper-slide {
+            width: 100%;
+            background-color: #343a40;
+            height: 100%;
+        }
+        /* --- End swiper styles --- */
+
+        .about-us {
+            width:100%;
+            height:100%;
+            padding: 100px;
+            color: white;
+            /* overflow: auto; */ /* This is now on swiper-slide */
+        }
+
+        .heading {
+            padding: 20px 10px;
+            font-size: 2.5rem;
+            color: #80ed99;
+        }
+
+        .about-us h3 {
+            padding: 10px;
+        }
+
+        .aboutme-deatils {
+            padding: 20px;
+            font-weight: 300;
+        }
+
+        .about-me-divison {
+            display: flex;
+        }
+
+        .about-me-table {
+            width: 60%;
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+        }
+
+        .about-me-table li {
+            padding: 20px;
+            position: relative;
+        }
+
+        .about-me-table li::after {
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #ffffff77, transparent);
+            content: '';
+            bottom: 0px;
+        }
+
+        .about-me-table span {
+            color: #80ed99;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .about-me-table .buttonGroup {
+            grid-column: 1/span 2;
+            justify-content: center;
+            padding: 50px;
+            flex: 1;
+        }
+
+        .skill-bar {
+            width: calc(40% - 20px);
+        }
+
+        .skill-bar li {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .skill-bar p {
+            color: #80ed99;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .skill-bar .bar {
+            width: 100%;
+            height: 15px;
+            background-color: #272c30;
+            border-radius: 20px;
+        }
+
+        .active-bar {
+            background-color: #80ed99;
+            height: 100%;
+            width: auto;
+            border-radius: 20px;
+        }
+
+        /* --- Other page styles --- */
+        .services {
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(3, calc(34% - 10px));
+            grid-template-rows: 100px calc(50% - 50px) calc(50% - 50px);
+            padding: 100px ;
+            box-sizing: border-box;
+        }
+        .services .heading { grid-column: 1/span 3; }
+        .services .service {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.437);
+            border-radius: 5px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            transition-duration: 0.25s;
+        }
+        .services .service i { font-size: 3rem; color:#80ed99 }
+        .services .service .service-icon {
+            padding: 0px 50px;
+            border-radius: 5px;
+            margin: 20px auto;
+        }
+        .service h2{ color:#80ed99 }
+        .service:hover { background-color: #80ed99; color: #176d2d }
+        .service:hover h2,.service:hover i{ color: #176d2d }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 33%);
+            padding:100px;
+            grid-template-rows: 100px calc(50% - 50px) calc(50% - 50px);
+        }
+        .gallery h1, .gallery h2 { grid-column: 1/span 3; }
+        .gallery h2 {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            padding: 20px 10px;
+        }
+        .gallery .project {
+            margin: 25px 20px;
+            margin-top: 0px;
+            background: #212529;
+            padding: 5px;
+            border-radius: 20px;
+        }
+        .gallery .project img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            border:none;
+        }
+        .contactMe {
+            display: grid;
+            grid-template-columns: 20% 80%;
+            grid-template-rows: 80px calc(25% - 20px) calc(25% - 20px) calc(25% - 20px) calc(25% - 20px);
+            position: relative;
+            padding:100px;
+        }
+        .contactMe h1 { grid-column: 1/span 3; font-size:2.5rem; padding:30px; }
+        .contactMe form { grid-area: 2/2/ span 5/span 2; }
+        .contactinfo {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            color: white;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+        .contactinfo i { padding: 10px; font-size: 2.5rem; color: #80ed99; margin: 20px auto; }
+        .contactinfo h3 { color: #80ed99; }
+        .contactMe form {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            width: 100%;
+            padding: 20px;
+            height: fit-content;
+            color: white;
+        }
+        .contactMe form h2 { grid-column: 1/span 2; padding: 20px; display: flex; }
+        .contactMe form input {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 5px;
+            font-size: 1.1rem;
+            border: none;
+            color: white;
+            background-color: #212529;
+        }
+        .contactMe form input:focus { border: 1px solid #85f69f; outline: none; }
+        .contactMe form textarea {
+            width: calc(100% - 40px);
+            grid-column: 1/span 2;
+            margin: 20px;
+            padding: 20px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            resize: none;
+            border:none;
+            color:white;
+            background-color: #212529;
+        }
+        .contactMe form textarea:focus { border: 1px solid #85f69f !important; }
+        .contactMe button{ grid-column: 1/span 2; margin:20px auto ; }
+        footer{
+            position:absolute;
+            bottom:0px;
+            right:0px;
+            text-align: center;
+            color:white;
+            width:100%;
+            font-weight: 200;
+            font-size: 0.8rem;
+        }
+        footer li{ padding:10px; }
+        form h2 .SocialLinks{
+            padding:5px;
+            width:fit-content;
+            margin-left:auto;
+            margin-right:10px;
+            background-color: #212529;
+            border-radius: 30px;
+        }
+        form h2 .SocialLinks i{ padding:10px; border-radius: 50%; transition-duration: 0.25s; }
+        form h2 .SocialLinks i:hover{ background-color: #176d2d; }
+
+        /* --- PREVIOUS <style> BLOCK --- */
         :root {
             --font-size-base: 1rem;
             --font-size-lg: 1.1rem;
             --font-size-xl: 1.25rem;
             --font-size-h3: 1.65rem;
         }
-        
-        body {
-            font-size: var(--font-size-base);
-        }
-
-        /* --- LAYOUT & SCROLL FIX --- */
+        body { font-size: var(--font-size-base); }
         html, body {
             position: relative;
             height: 100%;
@@ -33,42 +460,20 @@
             width: 100%;
             height: 100%;
         }
-        
-        /* Default slide style */
         .swiper-slide {
             height: 100%;
-            overflow-y: auto; /* Re-enabled default scrollbar */
+            overflow-y: auto;
             overflow-x: hidden;
             padding: 40px 60px;
             box-sizing: border-box;
             position: relative;
-            scroll-behavior: smooth; /* Smooth scrolling for PageUp/Down */
+            scroll-behavior: smooth;
         }
-        
-        /* === ENHANCED SCROLLBAR UI === */
-        .swiper-slide::-webkit-scrollbar {
-            width: 8px;
-        }
-        .swiper-slide::-webkit-scrollbar-track {
-            background: #1e1f22; 
-            border-radius: 10px;
-        }
-        .swiper-slide::-webkit-scrollbar-thumb {
-            background-color: #555; 
-            border-radius: 10px;
-            border: 2px solid #1e1f22; 
-        }
-        .swiper-slide::-webkit-scrollbar-thumb:hover {
-            background-color: #777; 
-        }
-        .swiper-slide {
-            scrollbar-width: thin; 
-            scrollbar-color: #555 #1e1f22; 
-        }
-        /* --- END ENHANCED SCROLLBAR --- */
-
-
-        /* Home slide override */
+        .swiper-slide::-webkit-scrollbar { width: 8px; }
+        .swiper-slide::-webkit-scrollbar-track { background: #1e1f22; border-radius: 10px; }
+        .swiper-slide::-webkit-scrollbar-thumb { background-color: #555; border-radius: 10px; border: 2px solid #1e1f22; }
+        .swiper-slide::-webkit-scrollbar-thumb:hover { background-color: #777; }
+        .swiper-slide { scrollbar-width: thin; scrollbar-color: #555 #1e1f22; }
         .home-slide {
             display: flex;
             justify-content: center;
@@ -76,7 +481,6 @@
             padding: 0;
             overflow-y: hidden;
         }
-        
         .HomeContent {
             position: relative;
             flex: 1;
@@ -86,8 +490,6 @@
             font-size: var(--font-size-lg);
             max-width: 600px;
         }
-
-        /* --- HOME PAGE - PROFILE LINKS (Top Right) --- */
         .social-links-home {
             position: absolute;
             top: 40px;
@@ -101,30 +503,13 @@
             font-size: 1.6rem;
             transition: color 0.3s ease;
         }
-        .social-links-home a:hover {
-            color: #ffd700;
-        }
-        
-        /* --- COLLISION FIX --- */
-        .HomeContent h1 {
-            padding-right: 200px;
-        }
+        .social-links-home a:hover { color: #ffd700; }
+        .HomeContent h1 { padding-right: 200px; }
         @media (max-width: 768px) {
-            .HomeContent h1 {
-                padding-right: 0; 
-            }
-            .social-links-home {
-                position: static; 
-                margin-top: 20px;
-                text-align: left; 
-            }
-            .social-links-home a {
-                margin: 0 10px 0 0; 
-            }
+            .HomeContent h1 { padding-right: 0; }
+            .social-links-home { position: static; margin-top: 20px; text-align: left; }
+            .social-links-home a { margin: 0 10px 0 0; }
         }
-        /* --- END COLLISION FIX --- */
-
-        /* --- ABOUT ME & ACHIEVEMENTS LAYOUT --- */
         .details-heading {
             font-size: var(--font-size-xl);
             color: #fff;
@@ -142,11 +527,7 @@
             margin-top: 0;
             padding-bottom: 60px;
         }
-        .achievements-section .details-heading {
-             margin-top: 0;
-        }
-
-        /* --- ACHIEVEMENTS LIST STYLING --- */
+        .achievements-section .details-heading { margin-top: 0; }
         .achievements-list {
             list-style: none;
             padding-left: 0;
@@ -171,13 +552,11 @@
             top: 2px;
             font-size: 1.2rem;
         }
-
-        /* --- PROJECT SECTION STYLES --- */
         .projects-container {
             width: 100%;
             max-width: 960px; 
             margin: 0 auto;
-            padding-bottom: 60px; /* Add padding to bottom for scroll */
+            padding-bottom: 60px;
         }
         .project-card {
             background-color: #1e1f22; 
@@ -202,9 +581,7 @@
             font-size: 1.3rem;
             transition: color 0.3s ease;
         }
-        .project-title .github-link:hover {
-            color: #fff;
-        }
+        .project-title .github-link:hover { color: #fff; }
         .project-tech {
             font-size: var(--font-size-base);
             color: #ffd700;
@@ -217,30 +594,210 @@
             color: #ccc;
             line-height: 1.7;
         }
+
+        /* --- NEW RESPONSIVE STYLES --- */
+
+        /* --- Hamburger Menu Button --- */
+        .menu-toggle-btn {
+            display: none; /* Hidden on desktop */
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001; /* Above sidebar */
+            background: #212529;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* --- Overlay --- */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999; /* Below sidebar, above content */
+        }
+        .overlay.active {
+            display: block;
+        }
+
+        /* --- Mobile Breakpoint --- */
+        @media (max-width: 992px) {
+            
+            /* --- Show Menu Button --- */
+            .menu-toggle-btn {
+                display: block;
+            }
+
+            /* --- Sidebar --- */
+            aside {
+                position: fixed;
+                left: -280px; /* Hidden by default */
+                top: 0;
+                z-index: 1000;
+                height: 100vh;
+            }
+            aside.sidebar-open {
+                left: 0; /* Shown when class is added */
+            }
+            aside li::after {
+                display: none; /* Remove dividers on mobile menu */
+            }
+            
+            /* --- Main Content --- */
+            .mySwiper {
+                width: 100%; /* Swiper takes full width */
+            }
+            
+            /* --- Font Sizes --- */
+            .HomeContent h1 { font-size: 2.2em; }
+            .HomeContent h2 { font-size: 1.8em; }
+            .HomeContent .heroline { font-size: 1.1rem; }
+            .heading { font-size: 2rem; }
+            
+            /* --- Slide Padding --- */
+            .swiper-slide {
+                padding: 40px 20px;
+            }
+            
+            /* --- Home Slide --- */
+            .home-slide {
+                flex-direction: column-reverse; /* Image on top */
+                justify-content: center;
+                padding: 40px 20px;
+                overflow-y: auto; /* Allow home to scroll if needed */
+            }
+            .HomeContent {
+                padding: 20px 10px;
+                width: 100%;
+                text-align: center;
+            }
+            .HomeContent h1 {
+                padding-right: 0; /* Override desktop style */
+            }
+            /* Override mobile stacking for social links */
+            .social-links-home {
+                position: static; 
+                margin-top: 20px;
+                text-align: center; 
+            }
+            .social-links-home a {
+                margin: 0 10px;
+            }
+            .SideImg {
+                width: 60%;
+                margin: 0 auto 30px auto;
+                margin-right: auto;
+            }
+            .SideImg .top-right-corner,
+            .SideImg .bottom-left-corner {
+                display: none; /* Hide decorative corners */
+            }
+            .slide-help {
+                display: none; /* Hide desktop "scroll" hint */
+            }
+            .buttonGroup {
+                justify-content: center;
+            }
+
+            /* --- About Me Slide --- */
+            .about-us {
+                padding: 40px 20px;
+            }
+            .about-me-divison {
+                flex-direction: column;
+            }
+            .about-me-table {
+                grid-template-columns: 1fr;
+                width: 100%;
+            }
+            .about-me-table .buttonGroup {
+                grid-column: 1; /* Fix grid span */
+            }
+            .skill-bar {
+                width: 100%;
+                margin-top: 30px;
+            }
+
+            /* --- Achievements Slide --- */
+            .achievements-list li {
+                font-size: var(--font-size-base); /* Slightly smaller on mobile */
+            }
+            
+            /* --- Project Slide --- */
+            .projects-container {
+                padding-bottom: 20px;
+            }
+            .project-title {
+                font-size: 1.4rem; /* var(--font-size-h3) is 1.65rem */
+            }
+            .project-description {
+                font-size: 1rem; /* var(--font-size-lg) is 1.1rem */
+            }
+
+            /* --- Other CSS (for portfolio.css) --- */
+            .services, .gallery {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            .contactMe {
+                grid-template-columns: 1fr;
+                padding: 40px 20px;
+            }
+            .contactMe form {
+                grid-area: auto;
+                grid-template-columns: 1fr;
+            }
+            .contactMe form input {
+                width: 100%;
+            }
+            .contactMe form h2 {
+                flex-direction: column;
+            }
+            form h2 .SocialLinks {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+
     </style>
 </head>
 <body>
     
+    <button id="menu-toggle" class="menu-toggle-btn">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    
+    <div id="overlay" class="overlay"></div>
+
     <main>
-        <aside>
+        <aside id="sidebar">
             <ul class="Links">
-                <li onclick="Navigate(0)" class="activeLink"><i class="fa-solid fa-house"></i>
+                <li onclick="Navigate(0)" class="activeLink nav-link"><i class="fa-solid fa-house"></i>
                     <p>Home</p>
                 </li>
-                <li onclick="Navigate(1)"><i class="fa-solid fa-user" ></i>
+                <li onclick="Navigate(1)" class="nav-link"><i class="fa-solid fa-user" ></i>
                     <p>About Me</p>
                 </li>
-                <li onclick="Navigate(2)"><i class="fa-solid fa-trophy"></i>
+                <li onclick="Navigate(2)" class="nav-link"><i class="fa-solid fa-trophy"></i>
                     <p>Achievements</p>
                 </li>
-                <li onclick="Navigate(3)"><i class="fa-solid fa-diagram-project"></i>
+                <li onclick="Navigate(3)" class="nav-link"><i class="fa-solid fa-diagram-project"></i>
                     <p>Projects</p>
                 </li>
-                <li ><i class="fas fa-file-alt"></i> <a href="Mutyala_Bhargavi_Resume.pdf" style="text-decoration: none;color: white;" target="_blank">
+                <li class="nav-link"><i class="fas fa-file-alt"></i> <a href="Mutyala_Bhargavi_Resume.pdf" style="text-decoration: none;color: white;" target="_blank">
                     <p>Resume</p></a>
                 </li>
             </ul>
         </aside>
+        
         <div class="swiper mySwiper">
             <div class="SlideContainer swiper-wrapper">
                 
@@ -394,38 +951,28 @@
             }
         }
         
-        // --- CUSTOM KEYBOARD CONTROLS SCRIPT ---
         function handleKeydown(e) {
             if (!swiper) return;
 
             const activeSlide = swiper.slides[swiper.activeIndex];
 
-            // Check for PageDown
             if (e.key === 'PageDown') {
-                // If we are on the Projects slide (index 3)
                 if (activeSlide.classList.contains('projects')) {
-                    e.preventDefault(); // Stop Swiper from changing slide
-                    // Scroll the slide's content down
+                    e.preventDefault(); 
                     activeSlide.scrollTop += activeSlide.clientHeight * 0.8;
                 } else {
-                    // Otherwise, go to the next slide
                     swiper.slideNext();
                 }
             } 
-            // Check for PageUp
             else if (e.key === 'PageUp') {
-                // If we are on the Projects slide (index 3)
                 if (activeSlide.classList.contains('projects')) {
-                    e.preventDefault(); // Stop Swiper from changing slide
-                    // Scroll the slide's content up
+                    e.preventDefault(); 
                     activeSlide.scrollTop -= activeSlide.clientHeight * 0.8;
                 } else {
-                    // Otherwise, go to the previous slide
                     swiper.slidePrev();
                 }
             }
         }
-        // --- END CUSTOM KEYBOARD SCRIPT ---
 
         document.addEventListener('DOMContentLoaded', () => {
             swiper = new Swiper('.mySwiper', {
@@ -437,12 +984,8 @@
                     shadowOffset: 20,
                     shadowScale: 0.94,
                 },
-                
-                // Keyboard control is now handled manually
                 keyboard: false, 
-                
                 mousewheel: true, 
-                
                 slidesPerView: 1, 
                 spaceBetween: 0,
                 
@@ -453,8 +996,38 @@
                 },
             });
             
-            // Add our custom keyboard listener to the document
             document.addEventListener('keydown', handleKeydown);
+
+            // --- NEW: MOBILE MENU SCRIPT ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function closeMenu() {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('active');
+            }
+
+            function openMenu() {
+                sidebar.classList.add('sidebar-open');
+                overlay.classList.add('active');
+            }
+
+            menuToggle.addEventListener('click', () => {
+                if (sidebar.classList.contains('sidebar-open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
+
+            overlay.addEventListener('click', closeMenu);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            // --- END NEW SCRIPT ---
         });
     </script>
     
