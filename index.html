@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     
-    <title>Bhargavi Mutyala</title> 
+    <title>Bhargavi Mani Mutyala</title> 
     <style>
         /* --- ALL CSS FROM portfolio.css AND PREVIOUS <style> BLOCKS --- */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -99,38 +99,45 @@
             user-select: none;
         }
 
+        /* === UPDATED IMAGE FRAME STYLES === */
         .SideImg {
             width: 30%;
             margin: auto 10px;
             margin-right: 100px;
             position: relative;
+            background-color: #212529; /* Frame color */
+            padding: 15px; /* Frame thickness */
+            border-radius: 15px; /* Frame radius */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Add depth */
         }
 
         .SideImg img {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 10px; /* Image radius (smaller than frame) */
+            display: block; /* Fixes any weird padding issues */
         }
 
         .SideImg .top-right-corner,
         .bottom-left-corner {
             position: absolute;
+            z-index: 1; /* Make sure they are on top of the padding */
         }
 
         .bottom-left-corner {
-            left: -50px;
-            bottom: -50px;
+            left: -20px; /* Adjust position */
+            bottom: -20px; /* Adjust position */
             rotate: -90deg;
         }
 
         .top-right-corner {
-            right: -50px;
-            top: -50px;
+            right: -20px; /* Adjust position */
+            top: -20px; /* Adjust position */
             rotate: 90deg;
         }
 
         .hr1 {
-            width: 150px;
-            height: 10px;
+            width: 100px; /* Smaller */
+            height: 8px; /* Thinner */
             border: none;
             background: #80ed99;
             border-top-right-radius: 3px;
@@ -138,13 +145,15 @@
         }
 
         .hr2 {
-            width: 10px;
-            height: 120px;
+            width: 8px; /* Thinner */
+            height: 80px; /* Shorter */
             border-bottom-left-radius: 3px;
             background: #80ed99;
             border: none;
             border-bottom-right-radius: 3px;
         }
+        /* === END UPDATED FRAME STYLES === */
+
 
         .HomeContent h1 {
             font-size: 3em;
@@ -950,32 +959,11 @@
             }
         }
         
-        function handleKeydown(e) {
-            if (!swiper) return;
-
-            const activeSlide = swiper.slides[swiper.activeIndex];
-
-            if (e.key === 'PageDown') {
-                if (activeSlide.classList.contains('projects')) {
-                    e.preventDefault(); 
-                    activeSlide.scrollTop += activeSlide.clientHeight * 0.8;
-                } else {
-                    swiper.slideNext();
-                }
-            } 
-            else if (e.key === 'PageUp') {
-                if (activeSlide.classList.contains('projects')) {
-                    e.preventDefault(); 
-                    activeSlide.scrollTop -= activeSlide.clientHeight * 0.8;
-                } else {
-                    swiper.slidePrev();
-                }
-            }
-        }
+        // --- Custom keyboard script removed ---
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- THIS IS THE RESPONSIVE FIX ---
+            // --- RESPONSIVE FIX ---
             const isDesktop = window.innerWidth >= 992; // 992px is your mobile breakpoint
 
             swiper = new Swiper('.mySwiper', {
@@ -995,8 +983,11 @@
                 
                 // --- End of fix ---
                 
-                keyboard: false, // Keep manual keyboard control
-                mousewheel: true, // Keep mousewheel for desktop
+                keyboard: false, // Keyboard is fully disabled
+                
+                // Mousewheel control for the cube
+                mousewheel: isDesktop ? true : false, 
+                
                 slidesPerView: 1, 
                 spaceBetween: 0,
                 
@@ -1007,7 +998,7 @@
                 },
             });
             
-            document.addEventListener('keydown', handleKeydown);
+            // --- Custom keydown listener removed ---
 
             // --- MOBILE MENU SCRIPT ---
             const menuToggle = document.getElementById('menu-toggle');
