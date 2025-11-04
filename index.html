@@ -10,40 +10,8 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
     <script defer src="portfolio.js"></script>
     
-    <title>Bhargavi Mutyala</title> <style>
-        .status-message {
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            display: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .success {
-            background-color: rgba(50, 205, 50, 0.2);
-            color: #2e7d32;
-            border: 1px solid #2e7d32;
-        }
-        
-        .error {
-            background-color: rgba(244, 67, 54, 0.2);
-            color: #c62828;
-            border: 1px solid #c62828;
-        }
-        
-        .sending {
-            background-color: rgba(3, 169, 244, 0.2);
-            color: #0277bd;
-            border: 1px solid #0277bd;
-        }
-    
-        #contact-form button[disabled] {
-            opacity: 0.7;
-            cursor: not-allowed;
-        } 
-
+    <title>Bhargavi Mutyala</title> 
+    <style>
         /* --- SCROLLBAR FIX --- */
         html, body {
             position: relative;
@@ -53,15 +21,108 @@
         .swiper-slide {
             overflow-y: auto; /* Allows scrolling *within* a slide if content is long */
             overflow-x: hidden;
+            /* Add padding for content within the slide */
+            padding: 20px 40px; 
+        }
+        /* Keep home slide centered */
+        .home-slide {
+            padding: 0; 
         }
         /* --- END FIX --- */
 
-        /* Simple style for new social links */
-        .SocialLinks a {
-            color: white; /* Or your preferred icon color */
+        /* Profile Links Styling (Moved from Contact Page) */
+        .profile-links-list a {
+            color: white; 
             text-decoration: none;
-            margin: 0 5px;
+            margin: 0 8px;
+            font-size: 1.2rem; /* Make icons a bit bigger */
         }
+        .profile-links-list a:hover {
+            color: #ccc; /* Simple hover effect */
+        }
+        
+        /* Achievements Styling */
+        .achievements-section {
+            margin-top: 30px;
+        }
+        
+        .achievements-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+        
+        .achievements-list li {
+            position: relative;
+            padding-left: 30px; /* Space for the icon */
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .achievements-list li::before {
+            content: '\f091'; /* Font Awesome trophy icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #ffd700; /* Gold color for the icon */
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        /* --- NEW PROJECT SECTION STYLES --- */
+        .projects-container {
+            width: 100%;
+            max-width: 960px; /* Max width for readability */
+            margin: 0 auto;
+            padding-bottom: 60px; /* Extra space at the bottom */
+        }
+
+        .project-card {
+            background-color: #1e1f22; /* Dark card background */
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-title .github-link {
+            color: #aaa;
+            margin-left: 15px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-title .github-link:hover {
+            color: #fff;
+        }
+
+        .project-tech {
+            font-size: 0.9rem;
+            color: #ffd700; /* Gold color for tech */
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        /* --- END PROJECT STYLES --- */
+
     </style>
 </head>
 <body>
@@ -75,22 +136,17 @@
                 <li onclick="Navigate(1)"><i class="fa-solid fa-user" ></i>
                     <p>About Me</p>
                 </li>
-                <li onclick="Navigate(2)"><i class="fa-solid fa-list"></i>
-                    <p>Skills</p>
-                </li>
-                <li onclick="Navigate(3)"><i class="fa-solid fa-images"></i>
-                    <p>Gallery</p>
-                </li>
-                <li onclick="Navigate(4)"><i class="fa-solid fa-comments"></i>
-                    <p>Contact Me</p>
+                <li onclick="Navigate(2)"><i class="fa-solid fa-diagram-project"></i>
+                    <p>Projects</p>
                 </li>
                 <li ><i class="fas fa-file-alt"></i> <a href="Mutyala_Bhargavi_Resume.pdf" style="text-decoration: none;color: white;" target="_blank">
                     <p>Resume</p></a>
                 </li>
-                </ul>
+            </ul>
         </aside>
         <div class="swiper mySwiper">
             <div class="SlideContainer swiper-wrapper">
+                
                 <div class="swiper-slide home-slide">
                     <div class="HomeContent">
                         <h1>Hi! I'm <span class="stylized-name">Bhargavi Mutyala</span>,</h1>
@@ -100,10 +156,7 @@
                             <li onclick="Navigate(1)">
                                 <button>about me </button>
                             </li>
-                            <li onclick="Navigate(4)">
-                                <button>Contact Me</button>
-                            </li>
-                        </div>
+                            </div>
                     </div>
                     <div class="SideImg">
                         <div class="top-right-corner">
@@ -119,6 +172,7 @@
                     <p class="slide-help">Scroll for next slide <i class="fa-solid fa-chevron-right fa-shake"></i>
                     </p>
                 </div>
+                
                 <div class="swiper-slide">
                     <div class="about-us">
                         <h1 class="heading">About Me</h1>
@@ -128,221 +182,94 @@
                         </p>
                         <div class="about-me-divison">
                             <div class="about-me-table">
-                                <li><span>Experience:</span> Data Visualization Intern at Infosys Springboard (Oct 2024-Dec 2024). Built a Power BI project to analyze urban economic data and integrated dashboards with a Streamlit web app.</li>
+                                <li><span>Experience:</span> Data Visualization Intern at Infosys Springboard (Oct 2024-Dec 2024). Built a Power BI project to analyze urban economic data and integrated dashboards with a Streamlit web app. [cite: 19, 20, 21]</li>
                                 <li><span>Country:</span> India</li>
-                                <li><span>Phone</span>: +91 8374147834</li>
-                                <li><span>Degree</span>: B.Tech. in Computer Science and Engineering (9.01 CGPA) from Shri Vishnu Engineering College for Women.</li>
-                                <div class="buttonGroup">
-                                    
-                                   </div>
+                                <li><span>Phone</span>: +91 8374147834 [cite: 2]</li>
+                                <li><span>Degree</span>: B.Tech. in Computer Science and Engineering (9.01 CGPA) from Shri Vishnu Engineering College for Women. [cite: 9, 10]</li>
+                                <li><span>Profiles:</span> 
+                                    <span class="profile-links-list">
+                                        <a href="https://www.linkedin.com/in/bhargavi-mani-mutyala-9742b7259/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                                        <a href="https://github.com/BhargaviManiMutyala" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                                        <a href="https://leetcode.com/u/BhargaviMutyala/" target="_blank" aria-label="LeetCode"><i class="fa-solid fa-code"></i></a> 
+                                        <a href="https://www.hackerrank.com/profile/22B01A05C4" target="_blank" aria-label="HackerRank"><i class="fa-brands fa-hackerrank"></i></a>
+                                    </span>
+                                </li>
                             </div>
-
-                            <div class="skill-bar">
-                                <li>
-                                    <p>HTML</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:99%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>CSS</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:80%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>JavaScript</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:85%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Python</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:50%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>C</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:70%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Java</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:70%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>SQL</p>
-                                    <div class="bar">
-                                        <div class="active-bar" style="width:50%"></div>
-                                    </div>
-                                </li>
+                            
+                            <div class="achievements-section">
+                                <h2 class="sub-heading" style="margin-bottom: 20px;">Achievements</h2>
+                                <ul class="achievements-list">
+                                    <li>Finalist at L&T Techgium 8th Edition (Top 36 from 3,000+ abstracts) [cite: 36]</li>
+                                    <li>Smart Coder Gold by Smart Interviews for excellence in problem-solving [cite: 37]</li>
+                                    <li>Third Prize Winner, APPATHON-24 (from 40+ teams) [cite: 38]</li>
+                                    <li>Top 25 Innovations, IDEATHON-2023 at college-level [cite: 39]</li>
+                                    <li>First Place, Group Discussion Competition (ISTE Student Chapter) [cite: 40]</li>
+                                    <li>NPTEL Certifications in Java and Database Management Systems [cite: 40]</li>
+                                    <li>Hackathon Participation at Smart India Hackathon and Google Solution Challenge [cite: 41]</li>
+                                    <li>HackerRank Gold Badge in Problem Solving [cite: 42]</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide services">
-
-                    <h1 class="heading">Skills</h1>
-                    <div class="service">
-                        <div class="service-icon"><i class="fa-solid fa-pen-ruler"></i></div>
-                        <h2>Web Design</h2>
-                        <p></p>
-                    </div>
-                    <div class="service">
-                        <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
-                        <h2>Web Development</h2>
-                        <p></p>
-                    </div>
-                    <div class="service">
-                        <div class="service-icon"><i class="fas fa-cubes"></i></div>
-                        <h2>App Development</h2>
-                        <p></p>
-                    </div>
-                    <div class="service">
-                        <div class="service-icon"><i class="fa-solid fa-image"></i></div>
-                        <h2>UI/UX designer</h2>
-                        <p></p>
-                    </div>
-                    <div class="service">
-                        <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                        <h2>Software Tool Development</h2>
-                        <p></p>
-                    </div>
-                    <div class="service">
-                        <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
-                        <h2>Data Visualization & ML</h2>
-                            
-                    </div>
-                    
-                </div>
                 
-                <div class="swiper-slide gallery" 
-     style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #2e3338;">
-  <div style="background-color: #1e1f22; padding: 40px 50px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; color: #fff; font-family: Arial, sans-serif;">
-    <h1 style="font-size: 32px; margin-bottom: 10px; color: #ffffff; letter-spacing: 1px;">Gallery</h1>
-    <p style="font-size: 16px; color: #aaa; margin: 0;">To be added soon...</p>
-  </div>
-</div>
-
-                <div class="swiper-slide contactMe">
-                    <h1 class="heading">Contact Me</h1>
-                    <br><br>
-                    <div class="contactinfo">
-                        <h3>Mobile No</h3>
-                        <p><a href="tel:+918374147834" style="text-decoration: none;color: white;" target="_blank" ><i class="fa-solid fa-phone"></i></a></p>
-                        <br>
-                    </div>
-                  <br>
-                    <div class="contactinfo">
-                        <h3>Email</h3>
-                        <p><a href="mailto:bhargavimanim@gmail.com" style="text-decoration: none;color: white;" target="_blank">   <i class="fa-regular fa-envelope"></i></a></p>
-                        <br>
-                    </div>
+                <div class="swiper-slide projects">
+                    <h1 class="heading">Projects</h1>
                     
-                
-                    
-                    <form id="contact-form">
-                        <h2>Send Me A Message 
-                            <div class="SocialLinks">
-                                <a href="https://www.linkedin.com/in/bhargavi-mani-mutyala-9742b7259/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="https://github.com/BhargaviManiMutyala" target="_blank"><i class="fa-brands fa-github"></i></a>
-                                <a href="https://leetcode.com/u/BhargaviMutyala/" target="_blank"><i class="fa-solid fa-code"></i></a> <a href="https://www.hackerrank.com/profile/22B01A05C4" target="_blank"><i class="fa-brands fa-hackerrank"></i></a>
-                            </div>
-                        </h2>
+                    <div class="projects-container">
                         
-                        <input type="text" id="user_name" name="user_name" placeholder="Your Name" required >
-                        <input type="email" id="user_email" name="user_email" placeholder="Your Email" required >
-                        
-                        <textarea rows="10" id="message" name="message" placeholder="Type your Message here..." required></textarea>
-                        <button type="submit" class="primary">Send</button>
-                        <div id="status-message" class="status-message"></div>
-                    </form>
-                
+                        <div class="project-card">
+                            <h3 class="project-title">AI-enabled building automation system</h3>
+                            <p class="project-tech">Arduino | Fine Tree Classifier | MATLAB | ThingSpeak | POC</p>
+                            <p class="project-description">
+                                Developed a prototype that reduces building carbon emissions by 50% leveraging sensor data on ThingSpeak and using a machine learning model to predict optimal actuator actions, minimizing energy waste and operational costs. [cite: 25]
+                            </p>
+                        </div>
+
+                        <div class="project-card">
+                            <h3 class="project-title">
+                                DeskSlot
+                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                            </h3>
+                            <p class="project-tech">Python | SQL | MySQL</p>
+                            <p class="project-description">
+                                Developed 'DeskSlot', a booking system that helps students easily find and reserve functional computer systems after class hours. [cite: 27] Features real-time accessibility tracking and efficient resource utilization to reduce wait times. [cite: 28]
+                            </p>
+                        </div>
+
+                        <div class="project-card">
+                            <h3 class="project-title">
+                                Legal awareness
+                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                            </h3>
+                            <p class="project-tech">HTML | CSS | JavaScript | Java | SQL | MySQL</p>
+                            <p class="project-description">
+                                Developed 'Legal Awareness', a comprehensive web application to educate users about various laws and legal procedures. [cite: 30] The platform provides interactive resources, case examples, and practical guidance, enabling users to clearly understand their rights and make informed decisions. [cite: 31]
+                            </p>
+                        </div>
+
+                        <div class="project-card">
+                            <h3 class="project-title">
+                                GrowthBridge
+                                <a href="https://github.com/BhargaviManiMutyala" target="_blank" class="github-link" aria-label="GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                            </h3>
+                            <p class="project-tech">Java | FireStore | Android Studio</p>
+                            <p class="project-description">
+                                Developed 'GrowthBridge', an Android application that connects visionary investors with innovative start-ups through a streamlined digital platform. [cite: 33] The app facilitates funding opportunities, networking, and growth for entrepreneurs. [cite: 34]
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
     </main>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<!-- Your custom script for EmailJS integration -->
-<script>
-    (function() {
-        // Replace with your EmailJS user ID, service ID, and template ID
-        const emailjsConfig = {
-            userID: "f2rgOvTwBew89578f",
-            serviceID: "service_sxw1v0t",
-            templateID: "template_tienmcd"
-        };
-        
-        // Initialize EmailJS
-        emailjs.init(emailjsConfig.userID);
-        
-        // Get the form element
-        const contactForm = document.getElementById('contact-form');
-        
-        // Add submit event listener
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                // Get the status message element
-                const statusMessage = document.getElementById('status-message');
-                
-                // Get the submit button
-                const submitButton = contactForm.querySelector('button[type="submit"]');
-                
-                // Show sending message
-                statusMessage.className = 'status-message sending';
-                statusMessage.textContent = 'Sending message...';
-                statusMessage.style.display = 'block';
-                
-                // Disable the submit button
-                submitButton.disabled = true;
-                
-                // Prepare template parameters
-                const templateParams = {
-                    from_name: document.getElementById('user_name').value,
-                    from_email: document.getElementById('user_email').value,
-                    message: document.getElementById('message').value,
-                    to_name: "Rohith" // Your name or recipient name
-                };
-                
-                // Send email using EmailJS
-                emailjs.send(
-                    emailjsConfig.serviceID,
-                    emailjsConfig.templateID,
-                    templateParams
-                ).then(function(response) {
-                    // Success message
-                    statusMessage.className = 'status-message success';
-                    statusMessage.textContent = 'Message sent successfully!';
-                    
-                    // Reset form
-                    contactForm.reset();
-                    
-                    // Enable submit button
-                    submitButton.disabled = false;
-                    
-                    // Hide status message after 5 seconds
-                    setTimeout(function() {
-                        statusMessage.style.display = 'none';
-                    }, 5000);
-                    
-                }).catch(function(error) {
-                    // Error message
-                    statusMessage.className = 'status-message error';
-                    statusMessage.textContent = 'Failed to send message. Please try again.';
-                    
-                    // Enable submit button
-                    submitButton.disabled = false;
-                    
-                    console.error('EmailJS error:', error);
-                });
-            });
-        }
-    })();
-    </script>
+    
 </body>
 </html>
