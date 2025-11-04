@@ -595,7 +595,7 @@
             line-height: 1.7;
         }
 
-        /* --- NEW RESPONSIVE STYLES --- */
+        /* --- RESPONSIVE STYLES --- */
 
         /* --- Hamburger Menu Button --- */
         .menu-toggle-btn {
@@ -725,7 +725,7 @@
                 width: 100%;
                 margin-top: 30px;
             }
-
+            
             /* --- Achievements Slide --- */
             .achievements-list li {
                 font-size: var(--font-size-base); /* Slightly smaller on mobile */
@@ -736,10 +736,10 @@
                 padding-bottom: 20px;
             }
             .project-title {
-                font-size: 1.4rem; /* var(--font-size-h3) is 1.65rem */
+                font-size: 1.4rem;
             }
             .project-description {
-                font-size: 1rem; /* var(--font-size-lg) is 1.1rem */
+                font-size: 1rem;
             }
 
             /* --- Other CSS (for portfolio.css) --- */
@@ -766,7 +766,6 @@
                 margin-top: 15px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -975,17 +974,29 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- THIS IS THE RESPONSIVE FIX ---
+            const isDesktop = window.innerWidth >= 992; // 992px is your mobile breakpoint
+
             swiper = new Swiper('.mySwiper', {
-                effect: 'cube',
-                grabCursor: true,
+                // Use 'cube' on desktop, 'slide' (default horizontal) on mobile
+                effect: isDesktop ? 'cube' : 'slide', 
+                
+                // Only use cube effect settings on desktop
                 cubeEffect: {
-                    shadow: true,
-                    slideShadows: true,
+                    shadow: isDesktop,
+                    slideShadows: isDesktop,
                     shadowOffset: 20,
                     shadowScale: 0.94,
                 },
-                keyboard: false, 
-                mousewheel: true, 
+                
+                // Only show grab cursor on desktop
+                grabCursor: isDesktop,
+                
+                // --- End of fix ---
+                
+                keyboard: false, // Keep manual keyboard control
+                mousewheel: true, // Keep mousewheel for desktop
                 slidesPerView: 1, 
                 spaceBetween: 0,
                 
@@ -998,7 +1009,7 @@
             
             document.addEventListener('keydown', handleKeydown);
 
-            // --- NEW: MOBILE MENU SCRIPT ---
+            // --- MOBILE MENU SCRIPT ---
             const menuToggle = document.getElementById('menu-toggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
